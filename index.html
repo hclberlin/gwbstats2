@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>gwbstats2</title>
+	<link rel="stylesheet" href="gui/gwb_styles.css" type="text/css" />
+	<script type="text/javascript" src="js/jquery.tools.min.js"></script>
+	
+	<script id="userentry" type="text/html">
+	  <tr class="{{ tdclass }} {{ border }}">
+		<td class="small">{{ vPosition }}</td>
+		<td class="icon"><span></span></td>
+		<td class="user" title="{{ flickrId }}"><span>{{ userName }}</span></td>
+		<td class="score small">{{ vScore }}</td>
+		<td class="score-trend trend"><!--'--></td>
+		<td>{{ month.uploads }}</td>
+		<td class="uploads-trend trend"><!--&--></td>
+		<td class="percent" title="ø guessed: {{ month.uploadsGuessed }}">{{ month.uploadsGuessedPercent }}%</td>
+		<td class="small">{{ month.points }}</td>
+		<td class="points-trend trend"><!--&--></td>
+		<td class="wide">{{ max.vAvg }}</td>
+		<td>{{ max.cAvg }}</td>
+		<td>{{ max.fAvg }}</td>
+		<td class="wide">{{ totalUploads }}</td>
+		<td class="percent" title="ø guessed: {{ totalUploadsGuessed }}">{{ totalUploadsGuessedPercent }}%</td>
+		<td>{{ totalPoints }}</td>
+		<td>{{ totalScore }}</td>
+		<td>&nbsp;</td>
+	  </tr>
+	</script>
+	<script id="imglistentry" type="text/html">
+		<li><a href="{{ url }}" target="_blank" title="{{ username }}: {{ title }}" data-img="{{ thumb }}"><span class="loading"></span></a>
+			<span class="icon"></span><span class="count">{{ count }} Comments</span></li>
+	</script>
+	<script id="flickrlinks" type="text/html">
+		<a href="http://www.flickr.com/groups/gwb/pool/{{ flickrId }}/" class="photos_link" target="_blank">posted</a>
+		<a href="http://www.flickr.com/photos/{{ flickrId }}/tags/guesswhereberlin" class="unguessed_link" target="_blank">unguessed</a>
+		<a href="http://www.flickr.com/photos/{{ flickrId }}/" class="photos_link" target="_blank">all photos</a>
+		<a href="http://www.flickr.com/photos/{{ flickrId }}/tags/" class="tags_link" target="_blank">all tags</a>
+		<a href="http://www.flickr.com/people/{{ flickrId }}/" class="profile_link" target="_blank">profile</a>
+		<a href="http://www.flickr.com/photos/{{ flickrId }}/map/" class="map_link" target="_blank">map</a>					
+		<a href="http://www.flickr.com/mail/write/?to={{ flickrId }}" class="mail_link" target="_blank">send mail</a>
+	</script>
+	<script type="text/javascript" src="js/ICanHaz.min.js"></script>
+	<script type="text/javascript" src="js/gwb_script.js"></script>
+	
+</head>
+<body><div id="pagewrapper">
+
+	<header class="page grad01">
+		<nav id="headerNav">
+			<div id="monthTab">
+				<a href="index.html?month=2012-01"> jan </a>
+				<a href="index.html?month=2012-02"> feb </a>
+				<a href="index.html?month=2012-03"> mar </a>
+				<a href="index.html?month=2012-04"> apr </a>
+				<a href="index.html?month=2012-05"> may </a>
+				<a href="index.html?month=2012-06"> jun </a>
+				<a href="index.html?month=2012-07"> jul </a>
+				<a href="#" class="tab"> " </a>
+			</div>
+			<ul id="headerTabs" class="navi">
+			  <li id="homeTab"><a class="tab current" href="#">…</a></li>
+			  <li id="guessTab"><a class="tab" href="#">#</a></li>
+			  <li id="userTab"><a class="tab" href="#">!</a></li>
+			</ul>
+		</nav>
+		<div id="headerPanes">
+		 
+			<!-- wrapper for scrollable items -->
+			<ul class="headerItems">
+		 
+			  <!-- the items -->
+				<li id="groupHeader">
+					<span class="groupicon" style="background-image:url('http://farm1.static.flickr.com/41/buddyicons/39413187@N00.jpg');"></span>
+		
+					<h1>
+						<span>gwbstats 2</span>
+					</h1>
+					<dl>
+						<dt class="month">month:</dt>
+						<dt>players:</dt><dd class="players"></dd><dd class="players-trend trend"></dd>
+						<dt>uploads:</dt><dd class="uploads"></dd><dd class="uploads-trend trend"></dd>
+						<dt>% guessed:</dt><dd class="guessed"></dd><dd class="guessed-trend trend"></dd>
+						<dt>geotagged:</dt><dd class="geotagged"></dd><dd class="geotagged-trend trend"></dd>
+						<dt>ø views:</dt><dd class="views"></dd><dd class="views-trend trend"></dd>
+						<dt>ø comments:</dt><dd class="comments"></dd><dd class="comments-trend trend"></dd>
+						<dt>ø favs:</dt><dd class="favs"></dd><dd class="favs-trend trend"></dd>
+					</dl>
+					<ul id="maxphotos" class="imgList">
+						<li class="maxviews"><a href="#" target="_blank"><span class="loading"></span></a><span class="icon"></span><span class="count">xx</span></li>
+						<li class="maxcomments"><a href="#" target="_blank"><span class="loading"></span></a><span class="icon"></span><span class="count">xx</span></li>
+						<li class="maxfavs"><a href="#" target="_blank"><span class="loading"></span></a><span class="icon"></span><span class="count">xx</span></li>
+					</ul>
+				</li>
+				
+				<li id="guessHeader">
+				
+					<h1>
+						<span class="username">unguessed…</span>
+					</h1>
+					<p>(die ohne kommentare zuerst …)</p>
+					
+					<span class="prevList browse">%</span>
+					<span class="nextList browse">$</span>
+		
+					<div id="unguessedphotos" class="imgList maxcomments">
+						<div class="items">
+						</div>
+					</div>
+				</li>
+				
+				<li id="userHeader">
+					<span class="usericon"></span>
+		
+					<h1>
+						<span class="username">gwbstats2</span>
+					</h1>
+					<dl>
+						<dt>score:</dt><dd class="score"></dd><dd class="score-trend trend"></dd>
+						<dt>uploads:</dt><dd class="uploads"></dd><dd class="uploads-trend trend"></dd>
+						<dt>% guessed:</dt><dd class="guessed"></dd><dd class="guessed-trend trend"></dd>
+						<dt>gummipunkte:</dt><dd class="points"></dd><dd class="points-trend trend"></dd>
+						<dt>ø views:</dt><dd class="views"></dd><dd class="views-trend trend"></dd>
+						<dt>ø comments:</dt><dd class="comments"></dd><dd class="comments-trend trend"></dd>
+						<dt>ø favs:</dt><dd class="favs"></dd><dd class="favs-trend trend"></dd>
+					</dl>
+					
+					<div class="userlinks">
+						<a href="http://www.flickr.com/groups/gwb/pool/{{ flickrId }}/" class="photos_link" target="_blank">posted</a>
+						<a href="http://www.flickr.com/photos/{{ flickrId }}/tags/guesswhereberlin" class="unguessed_link" target="_blank">unguessed</a>
+						<a href="http://www.flickr.com/photos/{{ flickrId }}/" class="photos_link" target="_blank">all photos</a>
+						<a href="http://www.flickr.com/photos/{{ flickrId }}/tags/" class="tags_link" target="_blank">all tags</a>
+						<a href="http://www.flickr.com/people/{{ flickrId }}/" class="profile_link" target="_blank">profile</a>
+						<a href="http://www.flickr.com/photos/{{ flickrId }}/map/" class="map_link" target="_blank">map</a>					
+						<a href="http://www.flickr.com/mail/write/?to={{ flickrId }}" class="mail_link" target="_blank">send mail</a>
+					</div>
+
+					<ul id="userTabs" class="navi">
+					  <li id="photoTab" class="current">popular</li>
+					  <li id="statTab">stats</li>
+					</ul>
+					
+					<ul id="maxuserphotos" class="imgList">
+						<li class="maxviews"><a href="#" target="_blank"><span class="loading"></span></a><span class="icon"></span><span class="count">-</span></li>
+						<li class="maxcomments"><a href="#" target="_blank"><span class="loading"></span></a><span class="icon"></span><span class="count">-</span></li>
+						<li class="maxfavs"><a href="#" target="_blank"><span class="loading"></span></a><span class="icon"></span><span class="count">-</span></li>
+					</ul>
+					<ul id="statistik" class="statList">
+						<li class="days">
+							<a class="highFoto" target="_blank"><span>#</span></a>
+						</li> 
+						<li class="geo">
+							<div class="area area-guessed"></div>
+							<div class="area area-uploads"></div>
+							<a class="dot" target="_blank">●</a>
+							<div class="legend">
+								<span class="area area-guessed"></span> guessed
+								<span class="area area-uploads"></span> uploaded
+								<span class="dot">●</span> uploaded ø
+							</div>
+						</li>
+					</ul>
+					
+				</li>
+		 
+			</ul>
+		 
+		</div>
+	</header>
+	<section class="stats">
+		<div id="cluster" class="grad02">
+			<div class="xInfo info"><span>⇢</span> Guessed</div>
+			<div class="yInfo info"><span>⇡</span> Uploaded</div>
+			<div id="highDot">●</div>
+			
+		</div>
+		  <ul id="tableheader" class="table">
+			<li class="small"><div></div></li>
+			<li class="iconcell"><div></div></li>
+			<li class="user"><div></div></li>
+			<li class="small"><div><span>Score</span></div></li>
+			<li class="trend"><div></div></li>
+			<li><div><span>Uploads</span></div></li>
+			<li class="trend"><div></div></li>
+			<li><div><span>(davon erraten)</span></div></li>
+			<li class="small"><div><span>Gummipunkte</span></div></li>
+			<li class="trend"><div></div></li>
+			<li class="wide"><div><span>ø views</span></div></li>
+			<li><div><span>ø comments</span></div></li>
+			<li><div><span>ø favs</span></div></li>
+			<li class="wide"><div><span>Uploads gesamt</span></div></li>
+			<li><div><span>(davon erraten)</span></div></li>
+			<li><div><span>Gummipunkte gesamt</span></div></li>
+			<li><div><span>Score gesamt</span></div></li>
+		  </ul>
+		<div class="table-wrapper">		
+			<table id="ranking" class="table"><tbody>
+				
+			</tbody></table>
+		</div>
+	</section>
+	<section class="map">
+	</section>
+</div></body>
+</html>
