@@ -1,0 +1,96 @@
+///json
+error: 0
+geotagged: 341
+guessed: 827
+month: "2012-06"
+total: 1253
+unguessed: 426
+
+///guessers: Object
+flickrId: "14171734@N03"
+iconUrl: "http://farm6.static.flickr.com/5003/buddyicons/14171734@N03.jpg"
+taggifiedUsername: "lunamtra"
+totalGuessed: 306
+url: "http://www.flickr.com/photos/lunamtra/"
+userName: "lunamtra"
+
+///guessersScore: Object
+14171734@N03: 12
+
+///guessersTotalScore: Object
+7882942@N08: 420
+
+///photos: Array[1253]
+dateAdded: "Jun 30, 2012 9:13:41 AM"
+flickrId: "7468381322"
+guesserId: "45389544@N00"
+isLandscape: false
+latitude: 0
+longitude: 0
+nrComments: 3
+nrFavs: 0
+nrViews: 38
+thumbsUrl: "http://farm8.staticflickr.com/7140/7468381322_3810afc391_t.jpg"
+title: "Aspenweg 50-53 in Berlin-Spandau (Waldsiedlung)"
+uploaderId: "63937337@N05"
+url: "http://flickr.com/photos/63937337@N05/7468381322"
+wasReadded: false
+wasRemoved: false
+wrongTags: false
+
+///uploaders: Object
+flickrId: "14171734@N03"
+iconUrl: "http://farm6.static.flickr.com/5003/buddyicons/14171734@N03.jpg"
+totalGuessed: 98
+totalUploads: 116
+url: "http://www.flickr.com/photos/lunamtra/"
+userName: "lunamtra"
+
+///uploadersGuessed: Object
+14171734@N03: 2
+
+///uploadersScore: Object
+14171734@N03: 2
+
+///uploadersTotalGuessed: Object
+7702463@N05: 11
+
+///uploadersTotalScore: Object
+7343261@N04: 27
+
+//////////////////////////////////////////
+
+///month
+score
+uploads
+last-uploads
+uploads-guessed-percent
+last-uploads-guessed-percent
+points
+last-points
+ 
+days-active
+response-average
+views-max
+views-average
+comments-max
+comments-average
+favs-max
+favs-average
+
+///total
+score
+uploads
+uploads-guessed-percent
+points
+
+
+
+
+
+
+
+
+
+
+
